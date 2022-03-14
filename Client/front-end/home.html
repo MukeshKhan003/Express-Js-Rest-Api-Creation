@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Get Student List</title>
+</head>
+<body>
+    <h1>Get Student List</h1>
+    <input type="button" value="Get Student List" id="getStList">
+    <div id="tableId">
+        
+    </div>
+
+    <script>
+        $(document).ready((e)=>{
+            $('#getStList').on('click', ()=>{
+                console.log("Trigger Button Event");
+                $.ajax({
+                    url: "api/getStudentList",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: JSON.stringify({}),
+                    success: function(data){
+                        console.log(data);
+                        var getTableHtml = '<div>';
+                        for(let i=0; i<data.length; i++){
+                            getTableHtml += '<table>'+
+                            '<tr>'+
+                                '<td>'+
+                                    data[i].first_name;
+                                '</td>'+
+                                '<td>'+
+                                    data[i].last_name;
+                                '</td>'+
+                                '<td>'+
+                                    data[i].age;
+                                '</td>'+
+                            '</tr>'+
+                            '</table>';
+                        }
+
+                        $('#tableId').append(getTableHtml);
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

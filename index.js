@@ -1,4 +1,7 @@
+const exp = require('constants');
 const express = require('express');
+const { dirname } = require('path');
+const path = require('path');
 
 //create express app
 const app = express();
@@ -8,8 +11,10 @@ const port = process.env.PORT || 3000;
 
 //define roote route
 app.get('/', (req, res)=>{
-    res.send("Hello Express Js");
+    res.sendFile(path.join(__dirname, 'Client/front-end', 'home.html'));
 });
+
+// app.use(express.static(path.join(__dirname, 'Client/front-end', 'home.html')));
 
 const StudentRoutes = require('./src/routes/student.router');
 
