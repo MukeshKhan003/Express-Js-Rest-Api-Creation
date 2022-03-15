@@ -16,10 +16,23 @@ Student.getStudents = result => {
             console.log("get all student error", err);
             result(null, err);
         } else {
-            console.log("Student list fetching successfully", res);
+            console.log("Student list fetching successfully");
             result(null, res);
         }
     })
 }
 
+//get studen id query
+Student.getStudentById = (id, result) => {
+    console.log("Getting Id", id);
+    dbConn.query('select * from studentlist where id = ?', id, (err, res)=>{
+        if(err){
+            console.log("get student By Id Error", err);
+            result(null, err);
+        } else {
+            console.log("get student By Id", res);
+            result(null, res);
+        }
+    })
+}
 module.exports = Student;
